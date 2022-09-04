@@ -1,0 +1,71 @@
+:root {
+    --main-color: #383e52;
+    --svg-primary: invert(76%) sepia(40%) saturate(376%) hue-rotate(124deg) brightness(91%) contrast(88%);
+}
+
+.icon {
+    filter: var(--svg-primary);
+}
+
+.backdrop {
+    position: fixed;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-image: url("./images/download.jpg");
+
+    z-index: -1;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 15vh;
+
+    background-color: var(--main-color);
+
+    box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.6);
+}
+
+header>* {
+    padding: 0 6px;
+    width: 42px;
+}
+
+.banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 70vh;
+
+    backdrop-filter: brightness(50%) blur(3px);
+}
+
+.banner img {
+    width: 50vw;
+    height: 50vw;
+
+    border-radius: 100%;
+    box-shadow: 0px 4px 6px 1px rgba(0, 0, 0, 0.6);
+
+}
+
+.playback-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 15vh;
+
+    background-color: var(--main-color);
+
+    box-shadow: 0px -3px 0px 0px rgba(0, 0, 0, 0.6);
+}
+
+.playback-buttons>* {
+    width: 3em;
+}
