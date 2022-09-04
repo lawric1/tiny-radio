@@ -6,6 +6,15 @@
     Web: http://www.labnol.org/?p=26740 
 */
 
+// let station = {
+//     live_id: "",
+//     channel_url: "",
+//     title: "",
+//     genre: "",
+//     thumbnail: "",
+
+// }
+
 function onYouTubeIframeAPIReady() {
     var ctrlq = document.getElementById("youtube-audio");
 
@@ -42,7 +51,7 @@ function onYouTubeIframeAPIReady() {
         videoId: ctrlq.dataset.video,
         playerVars: {
             autoplay: ctrlq.dataset.autoplay,
-            loop: ctrlq.dataset.loop
+            loop: ctrlq.dataset.loop,
         },
         events: {
             onReady: function(e) {

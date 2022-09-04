@@ -1,5 +1,6 @@
 :root {
     --main-color: #383e52;
+    --text-primary: #dddddd;
     --svg-primary: invert(76%) sepia(40%) saturate(376%) hue-rotate(124deg) brightness(91%) contrast(88%);
 }
 
@@ -18,6 +19,8 @@
     z-index: -1;
 }
 
+
+
 header {
     display: flex;
     justify-content: space-between;
@@ -35,17 +38,34 @@ header>* {
     width: 42px;
 }
 
+
+
 .banner {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
     height: 70vh;
 
+    color: var(--text-primary);
+
     backdrop-filter: brightness(50%) blur(3px);
 }
 
-.banner img {
+.banner>* {
+    margin: 10px 0;
+}
+
+.banner-mid {
+    display: flex;
+}
+
+.banner-mid>* {
+    margin: 0 12px;
+}
+
+.banner-image {
     width: 50vw;
     height: 50vw;
 
@@ -53,6 +73,13 @@ header>* {
     box-shadow: 0px 4px 6px 1px rgba(0, 0, 0, 0.6);
 
 }
+
+.banner-icon {
+    filter: var(--svg-primary);
+    width: 10vw;
+}
+
+
 
 .playback-buttons {
     display: flex;
