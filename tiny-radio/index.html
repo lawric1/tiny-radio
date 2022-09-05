@@ -7,33 +7,36 @@
   <title>Vite + TS</title>
 
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <link href="/dist/output.css" rel="stylesheet">
+  <link href="./src/style.css" rel="stylesheet">
 </head>
 
 <body>
-  <img class="backdrop" src="\src\images\download.jpg">
+  <img class="backdrop" id="backdrop" src="\src\images\download.jpg">
+
   <header>
     <img class="icon" src="./src/images/search.svg" alt="search">
     <img class="icon" src="./src/images/menu.svg" alt="menu">
   </header>
+
   <section class="banner">
-    <p>Lorem ipsum dolor sit amet.</p>
+    <p id="title">Lorem ipsum dolor sit amet.</p>
     <div class="banner-mid">
-      <img class="banner-icon" src="\src\images\previous.svg" alt="previous">
-      <img class="banner-image" src="\src\images\download.jpg">
-      <img class="banner-icon" src="\src\images\next.svg" alt="next">
+      <img id="previous" class="banner-icon" src="\src\images\previous.svg" alt="previous">
+      <img class="banner-image" id="bannerImage" src="\src\images\download.jpg">
+      <img id="next" class="banner-icon" src="\src\images\next.svg" alt="next">
     </div>
     <p>Chiptune I</p>
 
   </section>
-  <section class="playback-buttons">
 
-    <div class="icon" data-video="6uE8SJFBjZc" data-autoplay="0" data-loop="1" id="youtube-audio">
-    </div>
+  <section class="playback-buttons">
+    <img id="play" class="icon" src="\src\images\play.svg" alt="play" />
   </section>
 
-  <script src="./src/iframe_api.js"></script>
-  <script src="./src/yt.js"></script>
+  <iframe id="audio" width="0" height="0" type="text/html"
+    src="https://www.youtube.com/embed/6uE8SJFBjZc?autoplay=1&mute=0" frameborder="0" allow="autoplay">
+  </iframe>
+
   <script type="module" src="/src/main.ts"></script>
 </body>
 
