@@ -30,7 +30,7 @@ p {
     width: 100vw;
     height: 100vh;
 
-    background-image: url("./images/download.jpg");
+    background-color: var(--main-color);
     object-fit: cover;
 
     z-index: -1;
