@@ -1,7 +1,8 @@
 :root {
-    --main-color: #383e52;
+    --main-color: #222b35;
     --text-primary: #dddddd;
     --svg-primary: invert(76%) sepia(40%) saturate(376%) hue-rotate(124deg) brightness(91%) contrast(88%);
+    --svg-secondary: invert(76%) sepia(40%) saturate(376%) hue-rotate(124deg) brightness(140%) contrast(88%);
 }
 
 html,
@@ -14,7 +15,12 @@ body {
 }
 
 .icon {
+    width: 12vw;
     filter: var(--svg-primary);
+}
+
+.icon:hover {
+    filter: var(--svg-secondary)
 }
 
 p {
@@ -51,8 +57,7 @@ header {
 }
 
 header>* {
-    padding: 0 6px;
-    width: 42px;
+    padding: 0 12px;
 }
 
 
@@ -92,12 +97,6 @@ header>* {
     box-shadow: 0px 4px 6px 1px rgba(0, 0, 0, 0.6);
 
 }
-
-.banner-icon {
-    filter: var(--svg-primary);
-    width: 10vw;
-}
-
 
 
 .playback-buttons {

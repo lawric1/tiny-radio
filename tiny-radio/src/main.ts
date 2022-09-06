@@ -12,9 +12,13 @@ let playButton = <HTMLImageElement>document.getElementById("play");
 
 
 let stationDB = ["6uE8SJFBjZc", "HW_vf_aDWws", "jfKfPfyJRdk"]
+let playing = true;
+
+
 
 
 function toggleSound() {
+    setPlayIcon()
     // State can be "0" (unmuted) or "1" (muted)
     let state = audio.src.slice(-1);
     let url = audio.src.slice(0, -1);
@@ -27,6 +31,8 @@ function toggleSound() {
 }
 
 function previousStation() {
+    resetPlayIcon()
+
     let videoID: string = audio.src.slice(30, -18)
     let index: number = (stationDB.indexOf(videoID) - 1) % stationDB.length;
 
@@ -34,6 +40,8 @@ function previousStation() {
 }
 
 function nextStation() {
+    resetPlayIcon()
+
     let videoID: string = audio.src.slice(30, -18)
     let index: number = (stationDB.indexOf(videoID) + 1) % stationDB.length;
 
@@ -55,6 +63,21 @@ async function setData(videoID: string) {
 }
 
 
+function setPlayIcon() {
+    playing = !playing;
+
+    playing == true
+        ? playButton.src = "/src/images/pause.svg"
+        : playButton.src = "/src/images/play.svg";
+}
+
+function resetPlayIcon() {
+    playing = true;
+    playButton.src = "/src/images/pause.svg"
+}
+
+
+
 window.addEventListener("load", () => {
     let randomIndex = Math.floor(Math.random() * stationDB.length);
     setData(stationDB[randomIndex]);
@@ -63,3 +86,9 @@ window.addEventListener("load", () => {
 playButton.addEventListener('click', toggleSound);
 previousButton.addEventListener('click', previousStation);
 nextButton.addEventListener('click', nextStation);
+
+
+// Design list screen on figma
+// ["Genre", "Url"] structure for station data
+// title is a link to stream
+// default volume to 50
