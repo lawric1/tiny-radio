@@ -9,13 +9,19 @@ let bannerImage = <HTMLImageElement>document.getElementById("bannerImage");
 let previousButton = <HTMLImageElement>document.getElementById("previous");
 let nextButton = <HTMLImageElement>document.getElementById("next");
 let playButton = <HTMLImageElement>document.getElementById("play");
+let menuButton = <HTMLImageElement>document.getElementById("menu");
+
+let listContainer = <HTMLImageElement>document.getElementById("list-container");
+let stationList = <HTMLImageElement>document.getElementById("station-list");
 
 
-let stationDB = ["6uE8SJFBjZc", "HW_vf_aDWws", "jfKfPfyJRdk"];
+let stationDB: object[] = [];
 let idList = ["6uE8SJFBjZc", "HW_vf_aDWws", "jfKfPfyJRdk"];
 
-let playing = true;
 let currentStationIndex = 0;
+
+let isAudioPlaying = true;
+let isMenuOpen = false
 
 
 
@@ -41,8 +47,8 @@ async function setData(station: any, stationID: string) {
 }
 
 
-
 function toggleSound() {
+    console.log("1");
     setPlayIcon();
 
     // State can be "0" (unmuted) or "1" (muted)
@@ -55,7 +61,6 @@ function toggleSound() {
         audio.src = url + "0"
     }
 }
-
 
 function previousStation() {
     resetPlayIcon();
@@ -73,18 +78,49 @@ function nextStation() {
 
 
 function setPlayIcon() {
-    playing = !playing;
+    isAudioPlaying = !isAudioPlaying;
 
-    playing == true
+    isAudioPlaying == true
         ? playButton.src = "/src/images/pause.svg"
         : playButton.src = "/src/images/play.svg";
 }
 
 function resetPlayIcon() {
-    playing = true;
+    isAudioPlaying = true;
     playButton.src = "/src/images/pause.svg"
 }
 
+
+function toggleMenu() {
+    console.log(isMenuOpen);
+
+
+    isMenuOpen
+        ? listContainer.style.display = "none"
+        : listContainer.style.display = "block";
+
+    isMenuOpen = !isMenuOpen;
+}
+
+function setMenuData() {
+    for (let i = 0; i < stationDB.length; i++) {
+        let thumbnailURL = "https://img.youtube.com/vi/" + idList[i] + "/maxresdefault.jpg";
+        let station: any = stationDB[i]
+
+        stationList.innerHTML += `
+            <div class="card">
+                <div class="image-container">
+                    <img class="card-image" src=${thumbnailURL}>
+                </div>
+                <div class="text-container">
+                    <p>Chiptune</p>
+                    <p>${station.title}</p>
+                </div>
+                <img id=${i} class="icon" src="/src/images/play.svg" />
+            </div>
+        `
+    }
+}
 
 
 window.addEventListener("load", async () => {
@@ -92,6 +128,8 @@ window.addEventListener("load", async () => {
 
     currentStationIndex = Math.floor(Math.random() * stationDB.length);
     setData(stationDB[currentStationIndex], idList[currentStationIndex]);
+
+    setMenuData();
 });
 
 
@@ -99,12 +137,16 @@ playButton.addEventListener('click', toggleSound);
 previousButton.addEventListener('click', previousStation);
 nextButton.addEventListener('click', nextStation);
 
+menuButton.addEventListener('click', toggleMenu);
 
 // Design list screen on figma
 // ["Genre", "Url"] structure for station data
 // title is a link to stream
 // default volume to 50
 
-// On load, for each video id, fetch the information with noembed and push it into "Stations" list.
-// Pick a random song of the stations list
-// When "list icon" is clicked, use the data on stations list to create new cards.
+// Add animations to buttons
+// Change font
+// disable keyboard and options
+// use hyphen to name styles and ids
+// fix padding issues in banner title
+// add genre
