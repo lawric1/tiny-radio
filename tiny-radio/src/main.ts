@@ -4,19 +4,19 @@ let audio = <HTMLIFrameElement>document.getElementById("audio");
 
 let title = <HTMLParagraphElement>document.getElementById("title");
 let backdrop = <HTMLImageElement>document.getElementById("backdrop");
-let bannerImage = <HTMLImageElement>document.getElementById("bannerImage");
+let thumbnail = <HTMLImageElement>document.getElementById("thumbnail");
 
 let previousButton = <HTMLImageElement>document.getElementById("previous");
 let nextButton = <HTMLImageElement>document.getElementById("next");
 let playButton = <HTMLImageElement>document.getElementById("play");
 let menuButton = <HTMLImageElement>document.getElementById("menu");
 
-let listContainer = <HTMLImageElement>document.getElementById("list-container");
-let stationList = <HTMLImageElement>document.getElementById("station-list");
+let menuContainer = <HTMLImageElement>document.getElementById("menu-container");
+let menuList = <HTMLImageElement>document.getElementById("menu-list");
 
 
 let stationDB: object[] = [];
-let idList = ["6uE8SJFBjZc", "HW_vf_aDWws", "jfKfPfyJRdk"];
+let idList = ["6uE8SJFBjZc", "kgx4WGK0oNU", "jfKfPfyJRdk", "vWpeYCEAaCA", "d3SV2tKr6BY"];
 
 let currentStationIndex = 0;
 
@@ -43,7 +43,7 @@ async function setData(station: any, stationID: string) {
     audio.src = audioURL;
     title.innerHTML = station.title;
     backdrop.src = thumbnailURL;
-    bannerImage.src = thumbnailURL;
+    thumbnail.src = thumbnailURL;
 }
 
 
@@ -76,28 +76,34 @@ function nextStation() {
     setData(stationDB[currentStationIndex], idList[currentStationIndex]);
 }
 
+function goToStation(index: number) {
+    resetPlayIcon();
+
+    currentStationIndex = index;
+    setData(stationDB[currentStationIndex], idList[currentStationIndex]);
+
+    toggleMenu();
+}
+
 
 function setPlayIcon() {
     isAudioPlaying = !isAudioPlaying;
 
     isAudioPlaying == true
-        ? playButton.src = "/src/images/pause.svg"
-        : playButton.src = "/src/images/play.svg";
+        ? playButton.src = "\\src\\images\\pause.svg"
+        : playButton.src = "\\src\\images\\play.svg";
 }
 
 function resetPlayIcon() {
     isAudioPlaying = true;
-    playButton.src = "/src/images/pause.svg"
+    playButton.src = "\\src\\images\\pause.svg"
 }
 
 
 function toggleMenu() {
-    console.log(isMenuOpen);
-
-
     isMenuOpen
-        ? listContainer.style.display = "none"
-        : listContainer.style.display = "block";
+        ? menuContainer.style.display = "none"
+        : menuContainer.style.display = "block";
 
     isMenuOpen = !isMenuOpen;
 }
@@ -107,7 +113,7 @@ function setMenuData() {
         let thumbnailURL = "https://img.youtube.com/vi/" + idList[i] + "/maxresdefault.jpg";
         let station: any = stationDB[i]
 
-        stationList.innerHTML += `
+        menuList.innerHTML += `
             <div class="card">
                 <div class="image-container">
                     <img class="card-image" src=${thumbnailURL}>
@@ -116,7 +122,7 @@ function setMenuData() {
                     <p>Chiptune</p>
                     <p>${station.title}</p>
                 </div>
-                <img id=${i} class="icon" src="/src/images/play.svg" />
+                <img id=${i} class="icon" src="\\src\\images\\play.svg"/>
             </div>
         `
     }
@@ -139,14 +145,25 @@ nextButton.addEventListener('click', nextStation);
 
 menuButton.addEventListener('click', toggleMenu);
 
-// Design list screen on figma
-// ["Genre", "Url"] structure for station data
+document.addEventListener('click', function (event) {
+    let target = event.target as HTMLElement;
+    let id = Number(target.id);
+
+    if (isNaN(id)) {
+        return;
+    }
+
+    goToStation(id);
+});
+
+
 // title is a link to stream
 // default volume to 50
 
-// Add animations to buttons
-// Change font
 // disable keyboard and options
-// use hyphen to name styles and ids
-// fix padding issues in banner title
 // add genre
+// Design search screen on figma
+// fix path issues on build
+// Clickable links on menu
+
+// Add hover animations;
