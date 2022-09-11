@@ -1,4 +1,6 @@
-import './style.css'
+import { open } from '@tauri-apps/api/shell';
+
+import './style.css';
 
 let audio = document.getElementById("audio") as HTMLIFrameElement;
 
@@ -162,19 +164,17 @@ menuList.addEventListener('click', function (event) {
     goToStation(Number(target.id));
 });
 
-playButton.addEventListener('click', toggleSound);
+thumbnail.addEventListener('click', () => {
+    open(`https://www.youtube.com/w/${idList[currentStationIndex]}`);
+});
+
 previousButton.addEventListener('click', previousStation);
 nextButton.addEventListener('click', nextStation);
+playButton.addEventListener('click', toggleSound);
 
 menuButton.addEventListener('click', toggleMenu);
 
 
-
-// title is a link to stream
-// default volume to 50
-
 // disable keyboard and options
 // add genre
 // fix path issues on build
-
-// Add hover animations;
