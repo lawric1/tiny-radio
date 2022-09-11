@@ -47,7 +47,7 @@ async function getStationData(): Promise<any> {
 
 function setData(station: any, stationID: string): void {
     let thumbnailURL: string = `https://img.youtube.com/vi/${stationID}/maxresdefault.jpg`;
-    let audioURL: string = `https://www.youtube.com/embed/" + stationID + "?autoplay=1&mute=0`;
+    let audioURL: string = `https://www.youtube.com/embed/${stationID}?autoplay=1&mute=0`;
 
     audio.src = audioURL;
     title.innerHTML = station.title;
@@ -135,7 +135,7 @@ function setMenuData(): void {
                     <p>Chiptune</p>
                     <p>${station.title}</p>
                 </div>
-                <img id=${i} class="icon" src="\\src\\images\\play.svg"/>
+                <img id="${i}" class="icon" src="\\src\\images\\play.svg"/>
             </div>
         `
     }
@@ -152,15 +152,14 @@ window.addEventListener("load", async () => {
     setMenuData();
 });
 
-document.addEventListener('click', function (event) {
+menuList.addEventListener('click', function (event) {
     let target = event.target as HTMLElement;
-    let id: any = Number(target.id);
 
-    if (isNaN(id)) {
+    if (target.className != "icon") {
         return;
     }
 
-    goToStation(id);
+    goToStation(Number(target.id));
 });
 
 playButton.addEventListener('click', toggleSound);
