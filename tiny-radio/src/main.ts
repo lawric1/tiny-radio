@@ -1,6 +1,11 @@
-import { open } from '@tauri-apps/api/shell';
+import { open } from "@tauri-apps/api/shell";
 
-import './style.css';
+import playIcon from "/play.svg"
+import pauseIcon from "/pause.svg"
+
+
+import "./style.css";
+
 
 let audio = document.getElementById("audio") as HTMLIFrameElement;
 
@@ -25,7 +30,21 @@ let idList: string[] = [
     "kgx4WGK0oNU",
     "jfKfPfyJRdk",
     "vWpeYCEAaCA",
-    "d3SV2tKr6BY"
+    "d3SV2tKr6BY",
+    "XDh0JcxrbPM",
+    "Otw7CXLqddM",
+    "O8bZF_UhPag",
+    "GDQnA1LVCWA",
+    "araK9j8mN9Y",
+    "whACSpi2zQ8",
+    "maPMGqBxrE4",
+    "5X18D-EbjUc",
+    "JoPeBwSJeVc",
+    "VR4H81bz-Bs",
+    "KkpZ2USDJYQ",
+    "IJF9SLjLt-M",
+    "8BOyTZTeSgM",
+    "xEsj0xptmsA",
 ];
 
 
@@ -35,6 +54,8 @@ let isAudioPlaying: boolean = true;
 let isMenuOpen: boolean = false
 
 
+// Util function to calculate negative modulo.
+const mod = (n: number, m: number): number => (n % m + m) % m;
 
 async function getStationData(): Promise<any> {
     stationDB = await Promise.all(
@@ -78,14 +99,14 @@ function toggleSound(): void {
 function previousStation(): void {
     resetPlayIcon();
 
-    currentStationIndex = (currentStationIndex - 1) % stationDB.length;
+    currentStationIndex = mod((currentStationIndex - 1), stationDB.length);
     setData(stationDB[currentStationIndex], idList[currentStationIndex]);
 }
 
 function nextStation(): void {
     resetPlayIcon();
 
-    currentStationIndex = (currentStationIndex + 1) % stationDB.length;
+    currentStationIndex = mod((currentStationIndex + 1), stationDB.length);
     setData(stationDB[currentStationIndex], idList[currentStationIndex]);
 }
 
@@ -103,13 +124,13 @@ function setPlayIcon(): void {
     isAudioPlaying = !isAudioPlaying;
 
     isAudioPlaying == true
-        ? playButton.src = "\\src\\images\\pause.svg"
-        : playButton.src = "\\src\\images\\play.svg";
+        ? playButton.src = pauseIcon
+        : playButton.src = playIcon;
 }
 
 function resetPlayIcon(): void {
     isAudioPlaying = true;
-    playButton.src = "\\src\\images\\pause.svg";
+    playButton.src = pauseIcon;
 }
 
 
@@ -137,7 +158,7 @@ function setMenuData(): void {
                     <p>Chiptune</p>
                     <p>${station.title}</p>
                 </div>
-                <img id="${i}" class="icon" src="\\src\\images\\play.svg"/>
+                <img id="${i}" class="icon" src="${playIcon}"/>
             </div>
         `
     }
@@ -174,7 +195,8 @@ playButton.addEventListener('click', toggleSound);
 
 menuButton.addEventListener('click', toggleMenu);
 
+document.addEventListener('contextmenu', event => event.preventDefault());
 
-// disable keyboard and options
-// add genre
-// fix path issues on build
+//TODO
+//  Add genres
+//  Add search bar on menu

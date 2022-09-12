@@ -12,16 +12,13 @@
   },
   "tauri": {
     "allowlist": {
-      "path": {
-        "all": true
-      },
       "shell": {
         "open": true
       }
     },
     "bundle": {
       "active": true,
-      "category": "DeveloperTool",
+      "category": "Music",
       "copyright": "",
       "deb": {
         "depends": []
